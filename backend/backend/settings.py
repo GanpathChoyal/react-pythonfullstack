@@ -28,7 +28,7 @@ import os
 SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-secret")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [
-    "majestic-stroopwafel-ba92c0.netlify.app",
+    "bright-meerkat-6a6400.netlify.app",
     "your-backend.onrender.com",
     "127.0.0.1",
     "localhost",
@@ -155,4 +155,9 @@ STATIC_URL = '/static/'
 
 # Add this line 👇
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+CORS_ALLOWED_ORIGINS = [
+    "https://bright-meerkat-6a6400.netlify.app",
+    "http://localhost:5173",  # for local dev with Vite
+]
+
 
