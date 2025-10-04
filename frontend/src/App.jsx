@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";   // ✅ new import
+import Navbar from "./src/components/Navbar"; // ✅ new import
 
 function Logout() {
   localStorage.clear();
