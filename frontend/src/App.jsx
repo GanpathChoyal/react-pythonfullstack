@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar"; // ✅ new import
+import NavBar from "./components/NavBar"; // ✅ new import
 
 function Logout() {
   localStorage.clear();
@@ -20,7 +20,7 @@ function RegisterAndLogout() {
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />   {/* ✅ Navbar always visible */}
+      <NavBar />   {/* ✅ Navbar always visible */}
       <Routes>
         <Route
           path="/"

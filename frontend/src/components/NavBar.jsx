@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function NavBar() {
   const linkStyle = ({ isActive }) => ({
     margin: "0 10px",
     textDecoration: "none",
@@ -21,4 +21,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;
