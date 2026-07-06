@@ -9,6 +9,7 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [summaries, setSummaries] = useState({});
   useEffect(() => {
     getNotes();
   }, []);
@@ -46,11 +47,29 @@ export default function Home() {
       .catch((error) => alert(error));
     
   };
+
+  const summarizeNote = (id) => {
+    api
+      .get(`/api/notes/${id}/summary/`)
+      .then((res) => {
+        setSummaries((prev) => ({ ...prev, [id]: res.data.summary }));
+      })
+      .catch((error) => alert(error));
+  };
+
   return (
     <div>
       <div>
         <h2>Notes</h2>
-        {notes.map((note)=>(<Note note={note} onDelete={deleteNote} key={note.id}/>)) }
+        {notes.map((note)=>(
+          <Note
+            note={note}
+            onDelete={deleteNote}
+            onSummarize={summarizeNote}
+            summary={summaries[note.id]}
+            key={note.id}
+          />
+        )) }
       </div>
       <form onSubmit={createNote}>
         <label htmlFor="title">Title:</label>
