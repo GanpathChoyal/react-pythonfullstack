@@ -167,8 +167,7 @@ STATIC_URL = '/static/'
 # Add this line 👇
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CORS_ALLOWED_ORIGINS = [
-    "https://bright-meerkat-6a6400.netlify.app",
-    "http://localhost:5173",  # for local dev with Vite
+    "https://smartnotesmaking.netlify.app" # for local dev with Vite
 ]
 
 
