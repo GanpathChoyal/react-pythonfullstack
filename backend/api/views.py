@@ -10,7 +10,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from google.api_core.exceptions import ResourceExhausted
+
 
 from .models import Note
 from .serializers import NoteSerializer, UserSerializer
@@ -72,17 +72,11 @@ class NoteSummaryView(APIView):
     def get(self, request, pk):
         note = get_object_or_404(Note.objects.filter(author=request.user), pk=pk)
         try:
-            print(note.content)
-            print(os.getenv("GEMINI_API_KEY"))
+           
 
             summary = summarize_text_with_groq(note.content)
             return Response({"summary": summary})
-        except ResourceExhausted:
-            fallback_summary = summarize_text_locally(note.content)
-            return Response(
-                {"summary": fallback_summary, "fallback": True},
-                status=status.HTTP_200_OK,
-            )
+        
         except Exception as exc:
             fallback_summary = summarize_text_locally(note.content)
             return Response(

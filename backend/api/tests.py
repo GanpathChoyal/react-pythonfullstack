@@ -17,17 +17,17 @@ class SummaryEndpointTests(TestCase):
     def test_user_can_get_summary_for_their_note(self):
         self.client.force_authenticate(self.user)
 
-        with patch("api.views.summarize_text_with_gemini", return_value="Short summary") as mock_summary:
+        with patch("api.views.summarize_text_with_groq", return_value="Short summary") as mock_summary:
             response = self.client.get(f"/api/notes/{self.note.pk}/summary/")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"summary": "Short summary"})
         mock_summary.assert_called_once_with("Hello world")
 
-    def test_falls_back_to_local_summary_when_gemini_is_unavailable(self):
+    def test_falls_back_to_local_summary_when_groq_is_unavailable(self):
         self.client.force_authenticate(self.user)
 
-        with patch("api.views.summarize_text_with_gemini", side_effect=Exception("quota exceeded")):
+        with patch("api.views.summarize_text_with_groq", side_effect=Exception("quota exceeded")):
             response = self.client.get(f"/api/notes/{self.note.pk}/summary/")
 
         self.assertEqual(response.status_code, 200)
